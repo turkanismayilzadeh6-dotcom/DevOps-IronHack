@@ -1,0 +1,32 @@
+# ───────────────────────────────────────────────
+# 1. Initialize git in your project folder
+git init
+
+# 2. Stage all files
+git add .
+
+# 3. First commit
+git commit -m "Initial commit"
+
+# 4. Connect to your GitHub repository
+#    (replace with your own repo URL)
+git remote add origin https://github.com/yourusername/your-repo-name.git
+
+# 5. Set main branch (most common in 2026)
+git branch -M main
+
+# 6. Push to GitHub (first time)
+git push -u origin main
+
+# ───────────────────────────────────────────────
+# Normal workflow after setup (repeat these)
+
+git add .                     # or git add file.js
+git commit -m "update login page"
+git push
+
+# ───────────────────────────────────────────────
+# Quick status / history shortcuts
+
+git status
+git log --oneline --graph
