@@ -1,1 +1,106 @@
+# ───────────────────────────────────────────────
+# Git Branching Essentials – Lab Commands
+# (Continue from existing repo with at least one commit on main/master)
 
+# 1. Check current branches (* = current)
+git branch
+
+# 2. Create a new feature branch (does NOT switch)
+git branch feature-user-profile
+
+# List branches again to confirm
+git branch
+
+# 3. Switch / checkout to the new branch
+git switch feature-user-profile
+# OR older syntax: git checkout feature-user-profile
+
+# Confirm current branch
+git branch
+
+# 4. Verify history (should show all commits from main)
+git log --oneline --graph
+
+# 5. Create + edit new file (e.g. FAQ.md)
+# (Do this in your editor, e.g. VS Code)
+# Content example:
+# # This is a FAQ file where we will add the frequently asked questions
+
+# 6. Stage and commit on feature branch
+git add .
+git commit -m "Added a FAQ file in the feature branch"
+
+# Quick checks
+git status
+git log --oneline --graph
+
+# ───────────────────────────────────────────────
+# Merge feature → main (fast-forward – no conflict)
+
+# 7. Switch back to main
+git switch main
+# OR: git checkout main
+
+# Confirm
+git branch
+
+# 8. Merge feature branch into main
+git merge feature-user-profile
+
+# After merge: fast-forward message expected
+git log --oneline --graph   # HEAD now includes FAQ commit
+
+# ───────────────────────────────────────────────
+# Create intentional conflict scenario
+
+# 9. Switch back to feature branch
+git switch feature-user-profile
+
+# 10. Edit existing file (e.g. README.md) – change same line differently
+# Example change:
+# # This is my first Readme file
+# We will commit this folder to the git repository
+
+git add .
+git commit -m "Update README.md file to create merge conflicts"
+
+# ───────────────────────────────────────────────
+# Trigger & resolve merge conflict
+
+# 11. Switch to main
+git switch main
+
+# 12. Try to merge → conflict happens
+git merge feature-user-profile
+# → Git stops + shows conflicted files
+
+# 13. Open conflicted file in VS Code / editor
+# Look for markers:
+# <<<<<<< HEAD          ← main version
+# =======               ← separator
+# >>>>>>> feature...    ← feature version
+
+# Resolve:
+# - Manually edit: keep what you want, remove markers
+# - Or use VS Code Merge Editor (button appears)
+#   → Choose left/right/both → Accept → Complete Merge
+
+# 14. After editing file(s)
+git add .                     # or git add README.md
+git commit -m "Merge conflict resolved"
+
+# Final check
+git status
+git log --oneline --graph
+
+# ───────────────────────────────────────────────
+# Clean up: Delete branch (safe after merge)
+
+# 15. Delete merged branch (normal delete)
+git branch -d feature-user-profile
+
+# If branch NOT merged → force delete
+# git branch -D feature-user-profile
+
+# Confirm deleted
+git branch
